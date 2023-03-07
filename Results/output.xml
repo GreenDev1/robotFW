@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.10 on win32)" generated="20230307 19:09:49.022" rpa="false" schemaversion="3">
+<suite id="s1" name="Googlesearch" source="C:\Users\lubom\PycharmProjects\robotFW\Tests\Google\FunctionalTestSuite\Googlesearch.robot">
+<test id="s1-t1" name="RPA challenge" line="10">
+<kw name="Zaciatok">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>http://rpachallenge.com/</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20230307 19:09:50.205" level="INFO">Opening browser 'chrome' to base url 'http://rpachallenge.com/'.</msg>
+<status status="PASS" starttime="20230307 19:09:50.205" endtime="20230307 19:09:53.710"/>
+</kw>
+<kw name="Download" library="RPA.HTTP">
+<arg>http://rpachallenge.com/assets/downloadFiles/challenge.xlsx</arg>
+<arg>overwrite=True</arg>
+<doc>An alias for the ``HTTP Get`` keyword.</doc>
+<msg timestamp="20230307 19:09:53.711" level="INFO">Creating a new HTTP session</msg>
+<msg timestamp="20230307 19:09:53.711" level="INFO">Creating Session using : alias=rpasession_alias.httprpachallenge.com, url=http://rpachallenge.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230307 19:09:53.711" endtime="20230307 19:09:55.097"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Start</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:55.097" level="INFO">Clicking button 'Start'.</msg>
+<status status="PASS" starttime="20230307 19:09:55.097" endtime="20230307 19:09:55.169"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:50.204" endtime="20230307 19:09:55.169"/>
+</kw>
+<kw name="Vypln formu">
+<kw name="Zober jeden zaznam">
+<var>${people}</var>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>challenge.xlsx</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230307 19:09:55.311" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x0000017B2E947D00&gt;</msg>
+<status status="PASS" starttime="20230307 19:09:55.170" endtime="20230307 19:09:55.311"/>
+</kw>
+<kw name="Read Worksheet As Table" library="RPA.Excel.Files">
+<var>${table}</var>
+<arg>header=True</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<msg timestamp="20230307 19:09:55.351" level="INFO">Created table: Table(columns=['First Name', 'Last Name', 'Company Name', 'Role in Company', 'Address', 'Email', 'Phone Number'], rows=10)</msg>
+<msg timestamp="20230307 19:09:55.352" level="INFO">${table} = Table(columns=['First Name', 'Last Name', 'Company Name', 'Role in Company', 'Address', 'Email', 'Phone Number'], rows=10)</msg>
+<status status="PASS" starttime="20230307 19:09:55.312" endtime="20230307 19:09:55.352"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<msg timestamp="20230307 19:09:55.353" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x0000017B2E947D00&gt;</msg>
+<status status="PASS" starttime="20230307 19:09:55.352" endtime="20230307 19:09:55.353"/>
+</kw>
+<return>
+<value>${table}</value>
+<status status="PASS" starttime="20230307 19:09:55.353" endtime="20230307 19:09:55.353"/>
+</return>
+<msg timestamp="20230307 19:09:55.353" level="INFO">${people} = Table(columns=['First Name', 'Last Name', 'Company Name', 'Role in Company', 'Address', 'Email', 'Phone Number'], rows=10)</msg>
+<status status="PASS" starttime="20230307 19:09:55.170" endtime="20230307 19:09:55.353"/>
+</kw>
+<for flavor="IN">
+<var>${person}</var>
+<value>@{people}</value>
+<iter>
+<var name="${person}">{'First Name': 'John', 'Last Name': 'Smith', 'Company Name': 'IT Solutions', 'Role in Company': 'Analyst', 'Address': '98 North Road', 'Email': 'jsmith@itsolutions.co.uk', 'Phone Number': 40716543298}</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:55.356" level="INFO">Typing text 'John' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:55.355" endtime="20230307 19:09:55.438"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:55.440" level="INFO">Typing text 'Smith' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:55.438" endtime="20230307 19:09:55.529"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:55.530" level="INFO">Typing text 'IT Solutions' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:55.529" endtime="20230307 19:09:55.658"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:55.658" level="INFO">Typing text 'Analyst' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:55.658" endtime="20230307 19:09:55.755"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:55.756" level="INFO">Typing text '98 North Road' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:55.755" endtime="20230307 19:09:55.902"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:55.903" level="INFO">Typing text 'jsmith@itsolutions.co.uk' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:55.902" endtime="20230307 19:09:56.044"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.045" level="INFO">Typing text '40716543298' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.044" endtime="20230307 19:09:56.171"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.171" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.171" endtime="20230307 19:09:56.234"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:55.355" endtime="20230307 19:09:56.235"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:55.354" endtime="20230307 19:09:56.235"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Jane', 'Last Name': 'Dorsey', 'Company Name': 'MediCare', 'Role in Company': 'Medical Engineer', 'Address': '11 Crown Street', 'Email': 'jdorsey@mc.com', 'Phone Number': 40791345621}</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.238" level="INFO">Typing text 'Jane' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.237" endtime="20230307 19:09:56.326"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.327" level="INFO">Typing text 'Dorsey' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.326" endtime="20230307 19:09:56.418"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.418" level="INFO">Typing text 'MediCare' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.418" endtime="20230307 19:09:56.517"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.517" level="INFO">Typing text 'Medical Engineer' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.517" endtime="20230307 19:09:56.639"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.640" level="INFO">Typing text '11 Crown Street' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.639" endtime="20230307 19:09:56.747"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.748" level="INFO">Typing text 'jdorsey@mc.com' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.747" endtime="20230307 19:09:56.856"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.857" level="INFO">Typing text '40791345621' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.856" endtime="20230307 19:09:56.955"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:56.955" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:09:56.955" endtime="20230307 19:09:57.001"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:56.235" endtime="20230307 19:09:57.001"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:56.235" endtime="20230307 19:09:57.001"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Albert', 'Last Name': 'Kipling', 'Company Name': 'Waterfront', 'Role in Company': 'Accountant', 'Address': '22 Guild Street', 'Email': 'kipling@waterfront.com', 'Phone Number': 4073541...</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.002" level="INFO">Typing text 'Albert' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.002" endtime="20230307 19:09:57.096"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.096" level="INFO">Typing text 'Kipling' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.096" endtime="20230307 19:09:57.189"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.190" level="INFO">Typing text 'Waterfront' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.189" endtime="20230307 19:09:57.306"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.306" level="INFO">Typing text 'Accountant' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.306" endtime="20230307 19:09:57.407"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.407" level="INFO">Typing text '22 Guild Street' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.407" endtime="20230307 19:09:57.514"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.515" level="INFO">Typing text 'kipling@waterfront.com' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.515" endtime="20230307 19:09:57.638"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.639" level="INFO">Typing text '40735416854' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.638" endtime="20230307 19:09:57.738"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.738" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.738" endtime="20230307 19:09:57.782"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:57.002" endtime="20230307 19:09:57.782"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:57.001" endtime="20230307 19:09:57.782"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Michael', 'Last Name': 'Robertson', 'Company Name': 'MediCare', 'Role in Company': 'IT Specialist', 'Address': '17 Farburn Terrace', 'Email': 'mrobertson@mc.com', 'Phone Number': 40733...</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.784" level="INFO">Typing text 'Michael' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.783" endtime="20230307 19:09:57.877"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.877" level="INFO">Typing text 'Robertson' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.877" endtime="20230307 19:09:57.974"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:57.975" level="INFO">Typing text 'MediCare' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:57.974" endtime="20230307 19:09:58.067"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.068" level="INFO">Typing text 'IT Specialist' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.067" endtime="20230307 19:09:58.179"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.180" level="INFO">Typing text '17 Farburn Terrace' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.179" endtime="20230307 19:09:58.294"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.294" level="INFO">Typing text 'mrobertson@mc.com' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.294" endtime="20230307 19:09:58.403"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.403" level="INFO">Typing text '40733652145' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.403" endtime="20230307 19:09:58.531"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.532" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.531" endtime="20230307 19:09:58.584"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:57.783" endtime="20230307 19:09:58.585"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:57.783" endtime="20230307 19:09:58.585"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Doug', 'Last Name': 'Derrick', 'Company Name': 'Timepath Inc.', 'Role in Company': 'Analyst', 'Address': '99 Shire Oak Road', 'Email': 'dderrick@timepath.co.uk', 'Phone Number': 407998...</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.586" level="INFO">Typing text 'Doug' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.585" endtime="20230307 19:09:58.672"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.672" level="INFO">Typing text 'Derrick' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.672" endtime="20230307 19:09:58.763"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.764" level="INFO">Typing text 'Timepath Inc.' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.763" endtime="20230307 19:09:58.865"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.866" level="INFO">Typing text 'Analyst' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.865" endtime="20230307 19:09:58.967"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:58.967" level="INFO">Typing text '99 Shire Oak Road' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:58.967" endtime="20230307 19:09:59.084"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.084" level="INFO">Typing text 'dderrick@timepath.co.uk' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.084" endtime="20230307 19:09:59.214"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.215" level="INFO">Typing text '40799885412' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.214" endtime="20230307 19:09:59.320"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.321" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.320" endtime="20230307 19:09:59.364"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:58.585" endtime="20230307 19:09:59.364"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:58.585" endtime="20230307 19:09:59.364"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Jessie', 'Last Name': 'Marlowe', 'Company Name': 'Aperture Inc.', 'Role in Company': 'Scientist', 'Address': '27 Cheshire Street', 'Email': 'jmarlowe@aperture.us', 'Phone Number': 4073...</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.365" level="INFO">Typing text 'Jessie' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.364" endtime="20230307 19:09:59.454"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.454" level="INFO">Typing text 'Marlowe' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.454" endtime="20230307 19:09:59.545"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.546" level="INFO">Typing text 'Aperture Inc.' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.545" endtime="20230307 19:09:59.646"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.646" level="INFO">Typing text 'Scientist' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.646" endtime="20230307 19:09:59.738"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.739" level="INFO">Typing text '27 Cheshire Street' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.738" endtime="20230307 19:09:59.846"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.846" level="INFO">Typing text 'jmarlowe@aperture.us' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.846" endtime="20230307 19:09:59.953"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:09:59.954" level="INFO">Typing text '40733154268' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:09:59.953" endtime="20230307 19:10:00.052"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.053" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.052" endtime="20230307 19:10:00.093"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:59.364" endtime="20230307 19:10:00.093"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:59.364" endtime="20230307 19:10:00.093"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Stan', 'Last Name': 'Hamm', 'Company Name': 'Sugarwell', 'Role in Company': 'Advisor', 'Address': '10 Dam Road', 'Email': 'shamm@sugarwell.org', 'Phone Number': 40712462257}</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.094" level="INFO">Typing text 'Stan' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.094" endtime="20230307 19:10:00.173"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.174" level="INFO">Typing text 'Hamm' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.174" endtime="20230307 19:10:00.263"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.263" level="INFO">Typing text 'Sugarwell' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.263" endtime="20230307 19:10:00.354"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.355" level="INFO">Typing text 'Advisor' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.354" endtime="20230307 19:10:00.449"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.449" level="INFO">Typing text '10 Dam Road' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.449" endtime="20230307 19:10:00.541"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.542" level="INFO">Typing text 'shamm@sugarwell.org' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.541" endtime="20230307 19:10:00.650"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.650" level="INFO">Typing text '40712462257' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.650" endtime="20230307 19:10:00.745"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.746" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.746" endtime="20230307 19:10:00.784"/>
+</kw>
+<status status="PASS" starttime="20230307 19:10:00.093" endtime="20230307 19:10:00.784"/>
+</kw>
+<status status="PASS" starttime="20230307 19:10:00.093" endtime="20230307 19:10:00.784"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Michelle', 'Last Name': 'Norton', 'Company Name': 'Aperture Inc.', 'Role in Company': 'Scientist', 'Address': '13 White Rabbit Street', 'Email': 'mnorton@aperture.us', 'Phone Number': ...</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.785" level="INFO">Typing text 'Michelle' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.785" endtime="20230307 19:10:00.878"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.879" level="INFO">Typing text 'Norton' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.878" endtime="20230307 19:10:00.966"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:00.967" level="INFO">Typing text 'Aperture Inc.' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:00.966" endtime="20230307 19:10:01.072"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.072" level="INFO">Typing text 'Scientist' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.072" endtime="20230307 19:10:01.184"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.185" level="INFO">Typing text '13 White Rabbit Street' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.184" endtime="20230307 19:10:01.332"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.333" level="INFO">Typing text 'mnorton@aperture.us' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.332" endtime="20230307 19:10:01.459"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.460" level="INFO">Typing text '40731254562' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.459" endtime="20230307 19:10:01.572"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.573" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.572" endtime="20230307 19:10:01.616"/>
+</kw>
+<status status="PASS" starttime="20230307 19:10:00.784" endtime="20230307 19:10:01.616"/>
+</kw>
+<status status="PASS" starttime="20230307 19:10:00.784" endtime="20230307 19:10:01.616"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Stacy', 'Last Name': 'Shelby', 'Company Name': 'TechDev', 'Role in Company': 'HR Manager', 'Address': '19 Pineapple Boulevard', 'Email': 'sshelby@techdev.com', 'Phone Number': 40741785...</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.617" level="INFO">Typing text 'Stacy' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.617" endtime="20230307 19:10:01.706"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.707" level="INFO">Typing text 'Shelby' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.707" endtime="20230307 19:10:01.801"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.801" level="INFO">Typing text 'TechDev' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.801" endtime="20230307 19:10:01.900"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:01.900" level="INFO">Typing text 'HR Manager' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:01.900" endtime="20230307 19:10:02.006"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.007" level="INFO">Typing text '19 Pineapple Boulevard' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.006" endtime="20230307 19:10:02.157"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.157" level="INFO">Typing text 'sshelby@techdev.com' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.157" endtime="20230307 19:10:02.281"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.282" level="INFO">Typing text '40741785214' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.282" endtime="20230307 19:10:02.388"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.388" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.388" endtime="20230307 19:10:02.433"/>
+</kw>
+<status status="PASS" starttime="20230307 19:10:01.616" endtime="20230307 19:10:02.433"/>
+</kw>
+<status status="PASS" starttime="20230307 19:10:01.616" endtime="20230307 19:10:02.433"/>
+</iter>
+<iter>
+<var name="${person}">{'First Name': 'Lara', 'Last Name': 'Palmer', 'Company Name': 'Timepath Inc.', 'Role in Company': 'Programmer', 'Address': '87 Orange Street', 'Email': 'lpalmer@timepath.co.uk', 'Phone Number': 407316...</var>
+<kw name="Fill and submit the form">
+<arg>${person}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelFirstName"]</arg>
+<arg>${person}[First Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.434" level="INFO">Typing text 'Lara' into text field '//input[@ng-reflect-name="labelFirstName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.433" endtime="20230307 19:10:02.517"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelLastName"]</arg>
+<arg>${person}[Last Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.517" level="INFO">Typing text 'Palmer' into text field '//input[@ng-reflect-name="labelLastName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.517" endtime="20230307 19:10:02.604"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelCompanyName"]</arg>
+<arg>${person}[Company Name]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.604" level="INFO">Typing text 'Timepath Inc.' into text field '//input[@ng-reflect-name="labelCompanyName"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.604" endtime="20230307 19:10:02.703"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelRole"]</arg>
+<arg>${person}[Role in Company]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.704" level="INFO">Typing text 'Programmer' into text field '//input[@ng-reflect-name="labelRole"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.704" endtime="20230307 19:10:02.798"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelAddress"]</arg>
+<arg>${person}[Address]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.799" level="INFO">Typing text '87 Orange Street' into text field '//input[@ng-reflect-name="labelAddress"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.798" endtime="20230307 19:10:02.903"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelEmail"]</arg>
+<arg>${person}[Email]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:02.903" level="INFO">Typing text 'lpalmer@timepath.co.uk' into text field '//input[@ng-reflect-name="labelEmail"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:02.903" endtime="20230307 19:10:03.013"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//input[@ng-reflect-name="labelPhone"]</arg>
+<arg>${person}[Phone Number]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:03.014" level="INFO">Typing text '40731653845' into text field '//input[@ng-reflect-name="labelPhone"]'.</msg>
+<status status="PASS" starttime="20230307 19:10:03.013" endtime="20230307 19:10:03.108"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Submit</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230307 19:10:03.108" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20230307 19:10:03.108" endtime="20230307 19:10:03.147"/>
+</kw>
+<status status="PASS" starttime="20230307 19:10:02.433" endtime="20230307 19:10:03.147"/>
+</kw>
+<status status="PASS" starttime="20230307 19:10:02.433" endtime="20230307 19:10:03.147"/>
+</iter>
+<status status="PASS" starttime="20230307 19:09:55.354" endtime="20230307 19:10:03.147"/>
+</for>
+<status status="PASS" starttime="20230307 19:09:55.170" endtime="20230307 19:10:03.148"/>
+</kw>
+<status status="PASS" starttime="20230307 19:09:50.204" endtime="20230307 19:10:03.148"/>
+</test>
+<status status="PASS" starttime="20230307 19:09:49.025" endtime="20230307 19:10:03.149"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Googlesearch">Googlesearch</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
